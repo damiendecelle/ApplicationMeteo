@@ -1,0 +1,285 @@
+<!DOCTYPE HTML>
+
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<link rel="icon" type="svg" sizes="16x16" href="https://upload.wikimedia.org/wikipedia/commons/b/bf/Circle-icons-weather.svg">
+		<title>Application météo by Damien Decelle</title>
+		<link rel="stylesheet" href="style.css"/>
+        <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.css' rel='stylesheet'/>
+        <link href="c3/c3.min.css" rel="stylesheet">
+	</head>
+
+    <body>
+        <!-- Importation des scripts JS -->
+        
+        <!-- Mapbox -->
+        <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.js'></script>
+
+        <!-- C3js -->
+        <script src="c3/d3-5.8.2.min.js" charset="utf-8"></script>
+        <script src="c3/c3.min.js"></script>
+
+        <!-- Script perso -->
+        <script src='API_OpenWeather_One_Call.js'></script>
+        <script src='API_OpenWeather_Air_Quality.js'></script>
+
+        <!-- Intégration des éléments dans la page HTML -->
+
+        <div id='map'></div>
+
+        <div class='bandeau'>
+            <input id="queryLoc" type="text" value="" placeholder="Renseigne ta ville" />
+            <input class="primary button" type="button" value="Rechercher" onclick="localisation() ; localisation1() ; localisation2()" />
+        </div>
+
+        <div class='map-overlay-2 top'>
+            <div class='map-overlay-inner'>
+                <fieldset>
+                    <label class="categoryLabel"><p>Cartes météorologiques</p></label>
+                    <div class="radio">
+                        <div>
+                            <input label="Températures" type="radio" name='rtoggle' id='temperature' value='temperature' onchange="switchlayer('temperature')" checked/>
+                        </div>
+                        <div>
+                            <input label="Précipitations" type="radio" name='rtoggle' id="precipitation" value="precipitation" onchange="switchlayer('precipitation')"/>
+                        </div>
+                        <div>
+                            <input label="Pression" type="radio" name='rtoggle' id="pression" value="pression" onchange="switchlayer('pression')"/>
+                        </div>
+                        <div>
+                            <input label="Vitesse du vent" type="radio" name='rtoggle' id="vent" value="vent" onchange="switchlayer('vent')"/>
+                        </div>
+                        <div>
+                            <input label="Nuages" type="radio" name='rtoggle' id="nuage" value="nuage" onchange="switchlayer('nuage')"/>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+
+        <div class='map-overlay' id='features'>
+            <h2>La météo actuelle</h2>
+            <div class="box1">
+                <h4 id="date"></h4>
+                <h4 id="heure"></h4>
+            </div>
+            <div class="box2">
+                <h3 id="zone_temp"></h3>
+                <div id="icon"></div>
+                <p id="ressenti"></p>
+                <p id="description"></p>
+                <div class="box1">
+                    <p id="zone_pression"></p>
+                    <p id="zone_humidité"></p>
+                    <p id="zone_vent"></p>
+                </div>
+                <div class="box1">
+                    <p id="zone_uv"></p>
+                    <p id="lever"></p>
+                    <p id="coucher"></p>
+                </div>
+            
+            </div>
+            <h4 id="aqi_air"></h4>
+        </div>
+        <div class='map-overlay' id='features3'>
+            <h2>Prévisions météo de la journée</h2>
+			<div id="chart"></div>
+        </div>
+        <div class='map-overlay' id='features2'>
+            <h2>Prévisions météo de la semaine</h2>
+            <div class="box7">
+                <p id="date1"></p>
+                <p id="date2"></p>
+                <p id="date3"></p>
+                <p id="date4"></p>
+                <p id="date5"></p>
+                <p id="date6"></p>
+                <p id="date7"></p>
+                <div id="icon1"></div>
+                <div id="icon2"></div>
+                <div id="icon3"></div>
+                <div id="icon4"></div>
+                <div id="icon5"></div>
+                <div id="icon6"></div>
+                <div id="icon7"></div>
+                <p id="zone_temp1"></p>
+                <p id="zone_temp2"></p>
+                <p id="zone_temp3"></p>
+                <p id="zone_temp4"></p>
+                <p id="zone_temp5"></p>
+                <p id="zone_temp6"></p>
+                <p id="zone_temp7"></p>
+                <p id="description1"></p>
+                <p id="description2"></p>
+                <p id="description3"></p>
+                <p id="description4"></p>
+                <p id="description5"></p>
+                <p id="description6"></p>
+                <p id="description7"></p>
+            </div>
+        </div>
+
+        <div class='map-overlay' id='legend'></div>
+
+        <script>
+
+        // Configuration de la carte
+		mapboxgl.accessToken = 'pk.eyJ1IjoiZGFtaWVuZGVjZWxsZSIsImEiOiJjazk0YTRpbnkwM2plM21vdWpnNXd1Z3JqIn0.9QS_uhJsKQ7iGH-urTNUGg';
+		var map = new mapboxgl.Map({
+			container: 'map',
+			style: 'mapbox://styles/mapbox/light-v10',
+			center: [-1.7033546065650105, 48.118588632350985],
+			zoom: 2,
+            attributionControl: false
+		});
+
+        map.on('load', function () {
+
+            // Ajout raster Température
+            map.addLayer({
+                id: 'temperature',
+                source: {"type": "raster",  "tiles": ["https://tile.openweathermap.org/map/temp_new/{z}/{x}/{y}.png?appid=932bf7e3763f417ca65743decf57a796"], "tileSize": 256},
+                type: "raster",
+                layout: {"visibility":"visible"}
+            });
+            legend.innerHTML = "<img src=\"./images/legende_temperature.png\" height=\"25px\">"; 
+            
+            // Ajout raster Précipitations
+            map.addLayer({
+                id: 'precipitation',
+                source: {"type": "raster",  "tiles": ["https://tile.openweathermap.org/map/precipitation_new/{z}/{x}/{y}.png?appid=932bf7e3763f417ca65743decf57a796"], "tileSize": 256},
+                type: "raster",
+                layout: {"visibility":"none"}
+            });
+
+            // Ajout raster Pression
+            map.addLayer({
+                id: 'pression',
+                source: {"type": "raster",  "tiles": ["https://tile.openweathermap.org/map/pressure_new/{z}/{x}/{y}.png?appid=932bf7e3763f417ca65743decf57a796"], "tileSize": 256},
+                type: "raster",
+                layout: {"visibility":"none"}
+            });
+
+            // Ajout raster Vitesse Vent
+            map.addLayer({
+                id: 'vent',
+                source: {"type": "raster",  "tiles": ["https://tile.openweathermap.org/map/wind_new/{z}/{x}/{y}.png?appid=932bf7e3763f417ca65743decf57a796"], "tileSize": 256},
+                type: "raster",
+                layout: {"visibility":"none"}
+            });
+
+            // Ajout raster Nuages
+            map.addLayer({
+                id: 'nuage',
+                source: {"type": "raster",  "tiles": ["https://tile.openweathermap.org/map/clouds_new/{z}/{x}/{y}.png?appid=932bf7e3763f417ca65743decf57a796"], "tileSize": 256},
+                type: "raster",
+                layout: {"visibility":"none"}
+            });
+
+        });
+
+        // Changement de couches
+
+        switchlayer = function (lname) {
+            if (document.getElementById('temperature').checked) {
+                map.setLayoutProperty('temperature', 'visibility', 'visible');
+                map.setLayoutProperty('precipitation', 'visibility', 'none');
+                map.setLayoutProperty('pression', 'visibility', 'none');
+                map.setLayoutProperty('vent', 'visibility', 'none');
+                map.setLayoutProperty('nuage', 'visibility', 'none');
+                legend.innerHTML = "<img src=\"./images/legende_temperature.png\" height=\"25px\">";
+            } else if (document.getElementById('precipitation').checked) {
+                map.setLayoutProperty('precipitation', 'visibility', 'visible');
+                map.setLayoutProperty('temperature', 'visibility', 'none');
+                map.setLayoutProperty('pression', 'visibility', 'none');
+                map.setLayoutProperty('vent', 'visibility', 'none');
+                map.setLayoutProperty('nuage', 'visibility', 'none');
+                legend.innerHTML = "<img src=\"./images/legende_precipitation.png\" height=\"25px\">";
+            } else if (document.getElementById('pression').checked) {
+                map.setLayoutProperty('pression', 'visibility', 'visible');
+                map.setLayoutProperty('precipitation', 'visibility', 'none');
+                map.setLayoutProperty('temperature', 'visibility', 'none');
+                map.setLayoutProperty('vent', 'visibility', 'none');
+                map.setLayoutProperty('nuage', 'visibility', 'none');
+                legend.innerHTML = "<img src=\"./images/legende_pression.png\" height=\"25px\">";
+            } else if (document.getElementById('vent').checked) {
+                map.setLayoutProperty('vent', 'visibility', 'visible');
+                map.setLayoutProperty('precipitation', 'visibility', 'none');
+                map.setLayoutProperty('pression', 'visibility', 'none');
+                map.setLayoutProperty('temperature', 'visibility', 'none');
+                map.setLayoutProperty('nuage', 'visibility', 'none');
+                legend.innerHTML = "<img src=\"./images/legende_vent.png\" height=\"25px\">";
+            } else if (document.getElementById('nuage').checked) {
+                map.setLayoutProperty('nuage', 'visibility', 'visible');
+                map.setLayoutProperty('precipitation', 'visibility', 'none');
+                map.setLayoutProperty('pression', 'visibility', 'none');
+                map.setLayoutProperty('vent', 'visibility', 'none');
+                map.setLayoutProperty('temperature', 'visibility', 'none');
+                legend.innerHTML = "<img src=\"./images/legende_nuages.png\" height=\"25px\">";
+            } 
+        }
+
+        // Ajout des controles de navigation
+        var nav = new mapboxgl.NavigationControl();
+        map.addControl(nav, 'top-left');
+
+        // Ajout de la géolocalisation
+        var geo = new mapboxgl.GeolocateControl({
+                positionOptions: {
+                    enableHighAccuracy: true
+                },
+                trackUserLocation: true
+            });
+        map.addControl(geo, 'top-left');
+
+        // Ajout Echelle cartographique
+        map.addControl(new mapboxgl.ScaleControl({
+            maxWidth: 120,
+            unit: 'metric'
+        }));
+
+        // Ajout d'un boutton de plein écran
+        var full = new mapboxgl.FullscreenControl({container: document.querySelector('body')});
+        map.addControl(full, 'top-left');
+
+        //Ajout de l'attribution
+        map.addControl(new mapboxgl.AttributionControl({customAttribution:'Damien Decelle | <a target="_top" rel="noopener" href="https://openweathermap.org/">© OpenWeather'}));
+
+        // Fonction permttant de rechercher la ville 
+        function localisation1() {
+            var queryLoc = document.getElementById("queryLoc").value;
+            // Appel de l'API en fonction de la latitude et la longitude de la ville
+            var url = "http://api.openweathermap.org/geo/1.0/direct?q=" + queryLoc + "&limit=1&appid=932bf7e3763f417ca65743decf57a796"
+
+            fetch(url)
+                // On transforme la réponse de l'API en JSON, c'est plus simple.
+                .then(rep => rep.json())
+                // On traite le JSON
+                .then((rep) => {
+
+                var lat = rep[0].lat;
+                var lon = rep[0].lon;
+
+                // Se rendre à l'endroit sélectionné
+                map.flyTo({
+                    center: [lon, lat],
+                    zoom: 10
+                    });
+            });
+        }
+
+        // On génère un graphique vide
+		var chart = c3.generate({
+			bindto: '#chart',
+			data: {
+				columns: [],
+			},
+		});
+
+        </script>
+    </body>
+
+</html>

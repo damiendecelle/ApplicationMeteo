@@ -1,0 +1,232 @@
+@import url('https://fonts.googleapis.com/css?family=Lato:400,500,600,700&display=swap');
+
+/* Style de corps de texte */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Lato';
+}
+
+/* police */
+
+p {
+    font-size: 10pt;
+    line-height: 1.4px;
+}
+
+h2 {
+    font-size: 14pt;
+}
+
+h3 {
+    font-size: 32pt;
+    color: #eb6e4b;
+    line-height: 1.4px;
+}
+
+h4 {
+    font-size: 12pt;
+    line-height: 1.4px;
+}
+
+/* Style map */
+#map {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+}
+
+.bandeau {
+    font: 12px/20px 'Lato';
+    position: absolute;
+    top: 20px;
+    left: 60px;
+    border-radius: 5px;
+}
+
+/* Style indicateurs */
+.map-overlay {
+z-index: 1;
+position: absolute;
+bottom: 0;
+right: 0;
+background: rgba(255, 255, 255, 0.8);
+right: 3%;
+font: 12px/20px 'Lato';
+overflow: auto;
+border-radius: 5px;
+}
+
+#features {
+z-index: 1;
+top: 45px;
+padding: 20px;
+height: 44%;
+margin-top: 10px;
+width: 300px;
+background-color: #FFFFFF;
+}
+
+.box1 {
+    display: grid;
+    grid-template-columns: 1fr;
+    position: relative;
+}
+
+.box2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+}
+
+#features2 {
+    z-index: 1;
+    bottom: 7.5%;
+    padding: 10px;
+    height: 250px;
+    margin-top: 10px;
+    width: 800px;
+    background-color: #FFFFFF;
+    }
+
+.box7 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    text-align: center;
+    position: relative;
+}
+
+#features3 {
+    z-index: 1;
+    bottom: 7.5%;
+    padding: 10px;
+    height: 380px;
+    margin-top: 10px;
+    left: 3%;
+    width: 675px;
+    background-color: #FFFFFF;
+    }
+
+#legend {
+    bottom: 30px;
+    background-color: #FFFFFF;
+}
+
+/* Style options couches */
+.map-overlay-2 {
+    font: 12px/20px 'Lato';
+    position: absolute;
+    width: 170px;
+    top: 45px;
+    left: 3%;
+    padding: 10px;
+}
+
+.map-overlay-2 .map-overlay-inner {
+    background-color: #fff;
+    box-shadow:0 1px 2px rgba(0, 0, 0, 0.10);
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.map-overlay-inner fieldset {
+    border: none;
+    padding: 0;
+}
+
+.map-overlay-inner .categoryLabel {
+    display: block;
+    font-weight: bold;
+    text-align: center;
+}
+
+.radio {
+	background: #ffffff;
+    font: 12px/20px 'Lato';
+	padding: 4px;
+	border-radius: 3px;
+    text-align: center;
+	position: relative;
+}
+
+.radio input {
+	width: auto;
+	height: 100%;
+	appearance: none;
+	outline: none;
+	cursor: pointer;
+	border-radius: 3px;
+	padding: 4px 8px;
+	background: #ffffff;
+	color: #000000;
+}
+
+.radio input:checked {
+	background-image: linear-gradient(180deg, #eb6e4b, #eb6e4b);
+	color: #fff;
+	box-shadow: 0 1px 1px #0000002e;
+	text-shadow: 0 1px 0px #79485f7a;
+}
+
+.radio input:before {
+	content: attr(label);
+	display: inline-block;
+	text-align: center;
+	width: 100%;
+}
+
+/* Configuration du bouton */
+
+input[type="submit"],
+input[type="reset"],
+input[type="button"],
+button,
+.button {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    -ms-appearance: none;
+    appearance: none;
+    -moz-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+    -webkit-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+    -ms-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+    background-color: transparent;
+    border-radius: 3px;
+    border: 0;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 1;
+    height: 22px;
+    width: 80px;
+    text-align: center;
+    white-space: nowrap;
+}
+
+    input[type="submit"].primary,
+    input[type="reset"].primary,
+    input[type="button"].primary,
+    button.primary,
+    .button.primary {
+        background-color: #eb6e4b;
+        box-shadow: none !important;
+        color: #fff !important;
+    }
+
+        input[type="submit"].primary:hover,
+        input[type="reset"].primary:hover,
+        input[type="button"].primary:hover,
+        button.primary:hover,
+        .button.primary:hover {
+            background-color: #ee8467;
+        }
+
+        input[type="submit"].primary:active,
+        input[type="reset"].primary:active,
+        input[type="button"].primary:active,
+        button.primary:active,
+        .button.primary:active {
+            background-color: #ee8467;
+        }
+            
