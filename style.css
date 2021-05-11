@@ -60,11 +60,11 @@ border-radius: 5px;
 
 #features {
 z-index: 1;
-top: 45px;
+top: 5%;
 padding: 20px;
 height: 44%;
 margin-top: 10px;
-width: 300px;
+width: 20%;
 background-color: #FFFFFF;
 }
 
@@ -84,9 +84,9 @@ background-color: #FFFFFF;
     z-index: 1;
     bottom: 7.5%;
     padding: 10px;
-    height: 250px;
+    height: 27%;
     margin-top: 10px;
-    width: 800px;
+    width: 47%;
     background-color: #FFFFFF;
     }
 
@@ -101,15 +101,15 @@ background-color: #FFFFFF;
     z-index: 1;
     bottom: 7.5%;
     padding: 10px;
-    height: 380px;
+    height: 43%;
     margin-top: 10px;
     left: 3%;
-    width: 675px;
+    width: 40%;
     background-color: #FFFFFF;
     }
 
 #legend {
-    bottom: 30px;
+    bottom: 3%;
     background-color: #FFFFFF;
 }
 
@@ -118,7 +118,7 @@ background-color: #FFFFFF;
     font: 12px/20px 'Lato';
     position: absolute;
     width: 170px;
-    top: 45px;
+    top: 5%;
     left: 3%;
     padding: 10px;
 }
