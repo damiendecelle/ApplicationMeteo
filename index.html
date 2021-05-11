@@ -145,7 +145,7 @@
                 type: "raster",
                 layout: {"visibility":"visible"}
             });
-            legend.innerHTML = "<img src=\"./images/legende_temperature.png\" height=\"25px\">"; 
+            legend.innerHTML = "<img src=\"https://raw.githubusercontent.com/damiendecelle/ApplicationMeteo/main/images/legende_temperature.PNG\" height=\"25px\">"; 
             
             // Ajout raster Précipitations
             map.addLayer({
@@ -190,35 +190,35 @@
                 map.setLayoutProperty('pression', 'visibility', 'none');
                 map.setLayoutProperty('vent', 'visibility', 'none');
                 map.setLayoutProperty('nuage', 'visibility', 'none');
-                legend.innerHTML = "<img src=\"./images/legende_temperature.png\" height=\"25px\">";
+                legend.innerHTML = "<img src=\"https://raw.githubusercontent.com/damiendecelle/ApplicationMeteo/main/images/legende_temperature.PNG\" height=\"25px\">";
             } else if (document.getElementById('precipitation').checked) {
                 map.setLayoutProperty('precipitation', 'visibility', 'visible');
                 map.setLayoutProperty('temperature', 'visibility', 'none');
                 map.setLayoutProperty('pression', 'visibility', 'none');
                 map.setLayoutProperty('vent', 'visibility', 'none');
                 map.setLayoutProperty('nuage', 'visibility', 'none');
-                legend.innerHTML = "<img src=\"./images/legende_precipitation.png\" height=\"25px\">";
+                legend.innerHTML = "<img src=\"https://raw.githubusercontent.com/damiendecelle/ApplicationMeteo/main/images/legende_precipitation.PNG\" height=\"25px\">";
             } else if (document.getElementById('pression').checked) {
                 map.setLayoutProperty('pression', 'visibility', 'visible');
                 map.setLayoutProperty('precipitation', 'visibility', 'none');
                 map.setLayoutProperty('temperature', 'visibility', 'none');
                 map.setLayoutProperty('vent', 'visibility', 'none');
                 map.setLayoutProperty('nuage', 'visibility', 'none');
-                legend.innerHTML = "<img src=\"./images/legende_pression.png\" height=\"25px\">";
+                legend.innerHTML = "<img src=\"https://raw.githubusercontent.com/damiendecelle/ApplicationMeteo/main/images/legende_pression.PNG\" height=\"25px\">";
             } else if (document.getElementById('vent').checked) {
                 map.setLayoutProperty('vent', 'visibility', 'visible');
                 map.setLayoutProperty('precipitation', 'visibility', 'none');
                 map.setLayoutProperty('pression', 'visibility', 'none');
                 map.setLayoutProperty('temperature', 'visibility', 'none');
                 map.setLayoutProperty('nuage', 'visibility', 'none');
-                legend.innerHTML = "<img src=\"./images/legende_vent.png\" height=\"25px\">";
+                legend.innerHTML = "<img src=\"https://raw.githubusercontent.com/damiendecelle/ApplicationMeteo/main/images/legende_vent.PNG\" height=\"25px\">";
             } else if (document.getElementById('nuage').checked) {
                 map.setLayoutProperty('nuage', 'visibility', 'visible');
                 map.setLayoutProperty('precipitation', 'visibility', 'none');
                 map.setLayoutProperty('pression', 'visibility', 'none');
                 map.setLayoutProperty('vent', 'visibility', 'none');
                 map.setLayoutProperty('temperature', 'visibility', 'none');
-                legend.innerHTML = "<img src=\"./images/legende_nuages.png\" height=\"25px\">";
+                legend.innerHTML = "<img src=\"https://raw.githubusercontent.com/damiendecelle/ApplicationMeteo/main/images/legende_nuages.PNG\" height=\"25px\">";
             } 
         }
 
