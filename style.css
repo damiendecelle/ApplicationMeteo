@@ -40,8 +40,8 @@ h4 {
 .bandeau {
     font: 12px/20px 'Lato';
     position: absolute;
-    top: 2%;
-    left: 3%;
+    top: 20px;
+    left: 55px;
     border-radius: 5px;
 }
 
@@ -52,7 +52,7 @@ position: absolute;
 bottom: 0;
 right: 0;
 background: rgba(255, 255, 255, 0.8);
-right: 3%;
+right: 45px;
 font: 12px/20px 'Lato';
 overflow: auto;
 border-radius: 5px;
@@ -60,7 +60,7 @@ border-radius: 5px;
 
 #features {
 z-index: 1;
-top: 5%;
+top: 45px;
 padding: 20px;
 height: 44%;
 margin-top: 10px;
@@ -82,11 +82,11 @@ background-color: #FFFFFF;
 
 #features2 {
     z-index: 1;
-    bottom: 7.5%;
+    bottom: 70px;
     padding: 10px;
     height: 27%;
     margin-top: 10px;
-    width: 47%;
+    width: 45%;
     background-color: #FFFFFF;
     }
 
@@ -99,17 +99,17 @@ background-color: #FFFFFF;
 
 #features3 {
     z-index: 1;
-    bottom: 7.5%;
+    bottom: 70px;
     padding: 10px;
     height: 43%;
     margin-top: 10px;
-    left: 3%;
+    left: 45px;
     width: 40%;
     background-color: #FFFFFF;
     }
 
 #legend {
-    bottom: 3%;
+    bottom: 25px;
     background-color: #FFFFFF;
 }
 
@@ -118,8 +118,8 @@ background-color: #FFFFFF;
     font: 12px/20px 'Lato';
     position: absolute;
     width: 170px;
-    top: 5%;
-    left: 3%;
+    top: 45px;
+    left: 45px;
     padding: 10px;
 }
 
